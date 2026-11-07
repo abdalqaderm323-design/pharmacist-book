@@ -1,5 +1,5 @@
 {
-  "dataVersion": 2,
+  "dataVersion": 3,
   "app": {
     "latestVersion": "1.0.0",
     "apkUrl": "https://github.com/abdalqaderm323-design/pharmacist-book/releases/latest/download/pharmacist-book.apk"
@@ -92,6 +92,186 @@
             "t": {
               "en": "Sample text.",
               "ar": "نص تجريبي."
+            }
+          }
+        ]
+      },
+      {
+        "id": "d5",
+        "rank": 5,
+        "title": {
+          "en": "Paracetamol (Acetaminophen)",
+          "ar": "باراسيتامول (Paracetamol)"
+        },
+        "sections": [
+          {
+            "h": {
+              "en": "General information",
+              "ar": "المعلومات الأساسية"
+            },
+            "t": {
+              "en": "Generic name: Paracetamol\nUS name: Acetaminophen\nDrug class: Analgesic, antipyretic\nATC code: N02BE01\nStatus: OTC in many countries\nRoute: Oral, rectal, IV\nMain use: Mild to moderate pain and fever",
+              "ar": "الاسم العلمي: Paracetamol\nالاسم الأمريكي: Acetaminophen\nالتصنيف: مسكن ألم وخافض حرارة\nرمز ATC: N02BE01\nالحالة: يُصرف دون وصفة في العديد من البلدان\nطرق الإعطاء: فموي، شرجي، وريدي\nالاستخدام الرئيسي: الألم الخفيف إلى المتوسط والحمّى"
+            }
+          },
+          {
+            "h": {
+              "en": "Mechanism of action",
+              "ar": "آلية العمل"
+            },
+            "t": {
+              "en": "Works mainly through central pathways of pain and temperature regulation.\n• Inhibits prostaglandin synthesis centrally.\n• Reduces the sensation of pain.\n• Lowers raised temperature by acting on the thermoregulatory center in the hypothalamus.\n• Weak anti-inflammatory effect compared with NSAIDs.\n• No significant antiplatelet effect.",
+              "ar": "يعمل بشكل رئيسي من خلال التأثير على المسارات المركزية المسؤولة عن الألم وتنظيم الحرارة.\n• يثبط تصنيع البروستاغلاندينات بشكل مركزي.\n• يقلل الإحساس بالألم.\n• يخفض درجة الحرارة المرتفعة عبر التأثير على مركز تنظيم الحرارة في الوطاء (Hypothalamus).\n• تأثيره المضاد للالتهاب ضعيف مقارنةً بـ NSAIDs.\n• لا يمتلك تأثيرًا ملحوظًا مضادًا لتجمع الصفائح الدموية."
+            }
+          },
+          {
+            "h": {
+              "en": "Indications",
+              "ar": "الاستطبابات"
+            },
+            "t": {
+              "en": "• Headache\n• Migraine\n• Toothache\n• Musculoskeletal pain\n• Back pain\n• Dysmenorrhea\n• Fever\n• Osteoarthritis pain\n• Postoperative pain\n• Mild to moderate pain",
+              "ar": "• الصداع\n• الشقيقة\n• ألم الأسنان\n• آلام العضلات\n• آلام الظهر\n• عسر الطمث\n• الحمى\n• ألم الفصال العظمي\n• الألم بعد العمليات\n• الألم الخفيف إلى المتوسط"
+            }
+          },
+          {
+            "h": {
+              "en": "Dosage forms",
+              "ar": "الأشكال الصيدلانية"
+            },
+            "t": {
+              "en": "• Tablet: 500 mg, 1000 mg\n• Capsule: 500 mg\n• Oral suspension: 120 mg/5 mL, 250 mg/5 mL\n• Syrup and oral drops: depends on the product\n• Suppository: 125 mg, 250 mg, 500 mg\n• Effervescent tablet: 500 mg, 1000 mg\n• Dispersible tablet: 250 mg, 500 mg\n• IV infusion: 10 mg/mL\n• Sachet / powder: 500 mg, 1000 mg\n\nStrengths may differ by manufacturer and market.",
+              "ar": "• أقراص: 500 ملغم، 1000 ملغم\n• كبسولات: 500 ملغم\n• معلّق فموي: 120 ملغم/5 مل، 250 ملغم/5 مل\n• شراب وقطرات فموية: حسب المنتج\n• تحاميل: 125 ملغم، 250 ملغم، 500 ملغم\n• أقراص فوّارة: 500 ملغم، 1000 ملغم\n• أقراص قابلة للتفتت: 250 ملغم، 500 ملغم\n• تسريب وريدي: 10 ملغم/مل\n• أكياس / بودرة: 500 ملغم، 1000 ملغم\n\nقد تختلف التراكيز حسب الشركة والسوق."
+            }
+          },
+          {
+            "h": {
+              "en": "Dosage — adults",
+              "ar": "الجرعات — البالغون"
+            },
+            "t": {
+              "en": "• Single dose: 500–1000 mg\n• Frequency: every 4–6 hours when needed\n• Maximum single dose: 1000 mg\n• Maximum daily dose: 4000 mg for a healthy adult according to some labels\n• Self-medication: preferably do not exceed 3000 mg/day without medical advice\n\nFollow the lower limit stated on the product label, and avoid exceeding the daily dose from all paracetamol-containing products.",
+              "ar": "• الجرعة الواحدة: 500–1000 ملغم\n• التكرار: كل 4–6 ساعات عند الحاجة\n• الحد الأقصى للجرعة الواحدة: 1000 ملغم\n• الحد الأقصى اليومي: 4000 ملغم للبالغ السليم وفق بعض النشرات\n• الاستخدام الذاتي: يُفضّل عدم تجاوز 3000 ملغم/يوم دون توجيه طبي\n\nيجب الالتزام بالحد الأقل المحدد في نشرة المنتج، وتجنب تجاوز الجرعة اليومية من جميع المنتجات المحتوية على الباراسيتامول."
+            }
+          },
+          {
+            "h": {
+              "en": "Dosage — children",
+              "ar": "الجرعات — الأطفال"
+            },
+            "t": {
+              "en": "• Single dose: 10–15 mg/kg\n• Frequency: every 4–6 hours when needed\n• Maximum doses: usually 4 doses per day (conservative approach)\n• Maximum daily dose: 60 mg/kg/day\n\nImportant: pediatric dosing depends on weight, not age alone. Newborns and young infants need special doses and medical guidance.",
+              "ar": "• الجرعة الواحدة: 10–15 ملغم/كغم\n• التكرار: كل 4–6 ساعات عند الحاجة\n• الحد الأقصى: عادةً 4 جرعات يوميًا وفق النهج المحافظ\n• الحد الأقصى اليومي: 60 ملغم/كغم/يوم\n\nمهم: جرعة الأطفال تعتمد على الوزن وليس العمر وحده. حديثو الولادة والرضع الصغار يحتاجون إلى جرعات خاصة وتوجيه طبي."
+            }
+          },
+          {
+            "h": {
+              "en": "Dosage — intravenous",
+              "ar": "الجرعات — الوريدي"
+            },
+            "t": {
+              "en": "• Used when oral administration is not suitable.\n• Dose depends on weight and age.\n• Follow the IV product leaflet.\n• Adult doses must not be applied automatically to children or low-weight patients.",
+              "ar": "• يُستخدم عند الحاجة إلى إعطاء الدواء وريديًا.\n• الجرعة تعتمد على الوزن والعمر.\n• يجب الالتزام بنشرة المستحضر الوريدي.\n• لا تُستخدم جرعات البالغين تلقائيًا للأطفال أو المرضى منخفضي الوزن."
+            }
+          },
+          {
+            "h": {
+              "en": "Pharmacokinetics",
+              "ar": "الحرائك الدوائية"
+            },
+            "t": {
+              "en": "• Absorption: rapid after oral administration\n• Bioavailability: approximately 70–90%\n• Tmax: usually 30–60 minutes\n• Protein binding: relatively low, increases at high doses\n• Metabolism: liver (glucuronidation, sulfation, CYP metabolism)\n• Half-life: approximately 2–3 hours in healthy adults\n• Excretion: kidneys, mainly as metabolites",
+              "ar": "• الامتصاص: سريع بعد الإعطاء الفموي\n• التوافر الحيوي: تقريبًا 70–90%\n• الوصول للذروة (Tmax): عادةً 30–60 دقيقة\n• الارتباط بالبروتين: منخفض نسبيًا، ويزداد عند الجرعات العالية\n• الأيض: الكبد (Glucuronidation وSulfation ومسار CYP)\n• عمر النصف: تقريبًا 2–3 ساعات في البالغين الأصحاء\n• الإطراح: الكلى، بصورة رئيسية كمستقلبات"
+            }
+          },
+          {
+            "h": {
+              "en": "Metabolism",
+              "ar": "الأيض"
+            },
+            "t": {
+              "en": "Paracetamol is metabolized in the liver via glucuronidation, sulfation, and the CYP450 pathway (especially CYP2E1).\n\nA small amount of the toxic metabolite NAPQI (N-acetyl-p-benzoquinone imine) is produced. It is normally cleared by glutathione.\n\nIn overdose, glutathione stores may be depleted and NAPQI accumulates, causing liver cell damage.",
+              "ar": "يتم استقلاب الباراسيتامول في الكبد عبر Glucuronidation وSulfation ومسار CYP450، خصوصًا CYP2E1.\n\nتنتج كمية صغيرة من المستقلب السام NAPQI (N-acetyl-p-benzoquinone imine)، ويتم التخلص منه عادةً بواسطة Glutathione.\n\nفي الجرعات الزائدة قد ينفد مخزون Glutathione ويتراكم NAPQI، مما يؤدي إلى تلف خلايا الكبد."
+            }
+          },
+          {
+            "h": {
+              "en": "Side effects",
+              "ar": "الآثار الجانبية"
+            },
+            "t": {
+              "en": "Common / mild:\n• Nausea\n• Vomiting\n• Mild rash\n\nSerious / rare:\n• Hepatotoxicity\n• Acute liver failure\n• Severe allergic reaction\n• Stevens–Johnson syndrome (very rare)\n• Thrombocytopenia (rare)\n• Nephrotoxicity, especially with chronic use or risk factors",
+              "ar": "الشائعة / الخفيفة:\n• الغثيان\n• التقيؤ\n• طفح جلدي خفيف\n\nالخطيرة / النادرة:\n• سمية الكبد\n• فشل الكبد الحاد\n• الحساسية الشديدة\n• متلازمة ستيفنز جونسون (نادرة جدًا)\n• نقص الصفائح الدموية (نادر)\n• سمية الكلى، خاصة مع الاستخدام المزمن أو عوامل الخطورة"
+            }
+          },
+          {
+            "h": {
+              "en": "Contraindications and precautions",
+              "ar": "موانع الاستعمال والتحذيرات"
+            },
+            "t": {
+              "en": "Contraindications:\n• Hypersensitivity to paracetamol\n• Some cases of severe hepatic impairment, per the product leaflet\n\nUse with caution in:\n• Hepatic impairment\n• Chronic alcohol use\n• Malnutrition\n• Low body weight\n• Severe renal impairment\n• Dehydration\n• Frequent or long-term use",
+              "ar": "موانع الاستعمال:\n• فرط الحساسية للباراسيتامول\n• بعض حالات القصور الكبدي الشديد، وفق نشرة المنتج\n\nيحتاج إلى الحذر في:\n• أمراض الكبد\n• الاستخدام المزمن للكحول\n• سوء التغذية\n• انخفاض الوزن\n• القصور الكلوي الشديد\n• الجفاف\n• الاستخدام المتكرر أو طويل الأمد"
+            }
+          },
+          {
+            "h": {
+              "en": "Drug interactions",
+              "ar": "التداخلات الدوائية"
+            },
+            "t": {
+              "en": "• Warfarin: frequent use may increase INR\n• Carbamazepine: may increase the risk of liver toxicity\n• Phenytoin: may affect metabolism and increase the risk of toxicity\n• Phenobarbital: may increase the risk of liver toxicity\n• Rifampicin: may increase the risk of liver toxicity\n• Alcohol: increases the risk of liver injury, especially with chronic use\n• Other paracetamol products: risk of overdose",
+              "ar": "• Warfarin: الاستخدام المتكرر قد يزيد INR\n• Carbamazepine: قد يزيد خطر سمية الكبد\n• Phenytoin: قد يؤثر على الأيض ويزيد خطر السمية\n• Phenobarbital: قد يزيد خطر سمية الكبد\n• Rifampicin: قد يزيد خطر السمية الكبدية\n• الكحول: يزيد خطر أذية الكبد، خصوصًا مع الاستخدام المزمن\n• منتجات باراسيتامول أخرى: خطر الجرعة الزائدة"
+            }
+          },
+          {
+            "h": {
+              "en": "Pregnancy and lactation",
+              "ar": "الحمل والرضاعة"
+            },
+            "t": {
+              "en": "• Pregnancy: may be used when needed at the recommended dose, under medical guidance.\n• Lactation: generally considered compatible with breastfeeding at usual therapeutic doses.",
+              "ar": "• الحمل: يمكن استخدامه عند الحاجة وفق الجرعة الموصى بها، مع مراعاة التوجيه الطبي.\n• الرضاعة: يُعد عمومًا متوافقًا مع الرضاعة عند استخدام الجرعات العلاجية المعتادة."
+            }
+          },
+          {
+            "h": {
+              "en": "Overdose",
+              "ar": "الجرعة الزائدة"
+            },
+            "t": {
+              "en": "Overdose can cause severe liver damage even if no symptoms appear at first.\n\nPossible symptoms:\n• Nausea\n• Vomiting\n• Abdominal pain\n• Sweating\n• Later: raised liver enzymes, jaundice, and liver failure\n\nAntidote: N-acetylcysteine (NAC). Used to treat paracetamol poisoning and most effective when given early.\n\nIf overdose is suspected, go to the emergency department immediately, even without symptoms. Do not wait for symptoms to appear.",
+              "ar": "الجرعة الزائدة قد تسبب تلفًا شديدًا في الكبد حتى لو لم تظهر أعراض مباشرة.\n\nالأعراض المحتملة:\n• الغثيان\n• التقيؤ\n• ألم البطن\n• التعرق\n• لاحقًا: ارتفاع إنزيمات الكبد، اليرقان، وفشل الكبد\n\nالترياق: N-acetylcysteine (NAC). يُستخدم لعلاج التسمم بالباراسيتامول، ويكون أكثر فعالية عند إعطائه مبكرًا.\n\nعند الاشتباه بجرعة زائدة يجب التوجه للطوارئ فورًا، حتى لو لم توجد أعراض. لا يُنتظر ظهور الأعراض."
+            }
+          },
+          {
+            "h": {
+              "en": "Patient counseling",
+              "ar": "نصائح صيدلانية"
+            },
+            "t": {
+              "en": "• Do not combine several medicines that contain paracetamol.\n• Use a proper measuring device for syrup, not a kitchen spoon.\n• Do not exceed the recommended dose.\n• See a doctor if fever or pain persists.\n• Patients with liver disease need dose review.\n• Overdose is an emergency.",
+              "ar": "• لا تجمع بين عدة أدوية تحتوي على Paracetamol.\n• استخدم أداة قياس مناسبة للشراب، وليس ملعقة الطعام.\n• لا تتجاوز الجرعة الموصى بها.\n• راجع الطبيب إذا استمرت الحمى أو الألم.\n• مرضى الكبد يحتاجون إلى مراجعة الجرعة.\n• الجرعة الزائدة حالة طارئة."
+            }
+          },
+          {
+            "h": {
+              "en": "Storage",
+              "ar": "التخزين"
+            },
+            "t": {
+              "en": "• Store at room temperature as stated on the leaflet.\n• Keep away from moisture and direct heat.\n• Keep out of reach of children.\n• Do not use after the expiry date.",
+              "ar": "• يُحفظ بدرجة حرارة الغرفة حسب النشرة.\n• بعيدًا عن الرطوبة والحرارة المباشرة.\n• بعيدًا عن متناول الأطفال.\n• لا يُستخدم المستحضر بعد انتهاء الصلاحية."
+            }
+          },
+          {
+            "h": {
+              "en": "Note",
+              "ar": "ملاحظة"
+            },
+            "t": {
+              "en": "Maximum doses, syrup strengths, and pediatric doses differ between products and countries. This reference is not a substitute for the official drug leaflet or a clinical dosing reference.",
+              "ar": "الجرعات القصوى، وتراكيز الشراب، وجرعات الأطفال تختلف بين المنتجات والدول؛ لذلك لا ينبغي اعتبار هذا المرجع بديلًا عن النشرة الدوائية الرسمية أو مرجع الجرعات السريري."
             }
           }
         ]
@@ -276,6 +456,70 @@
         ],
         "ar": [
           "توصية تجريبية."
+        ]
+      }
+    },
+    {
+      "drug": "d5",
+      "forms": [
+        {
+          "id": "f_para_child",
+          "label": {
+            "en": "Children — 15 mg/kg per dose",
+            "ar": "أطفال — 15 ملغم/كغم للجرعة"
+          },
+          "method": "perKg",
+          "perKg": 15,
+          "maxSingle": 1000,
+          "timesPerDay": 4,
+          "minAge": 1,
+          "maxAge": 11
+        },
+        {
+          "id": "f_para_adult500",
+          "label": {
+            "en": "Adults — 500 mg",
+            "ar": "بالغون — 500 ملغم"
+          },
+          "method": "fixed",
+          "fixed": 500,
+          "timesPerDay": 4,
+          "maxDaily": 4000,
+          "minAge": 12,
+          "maxAge": 120
+        },
+        {
+          "id": "f_para_adult1000",
+          "label": {
+            "en": "Adults — 1000 mg",
+            "ar": "بالغون — 1000 ملغم"
+          },
+          "method": "fixed",
+          "fixed": 1000,
+          "timesPerDay": 4,
+          "maxDaily": 4000,
+          "minAge": 12,
+          "maxAge": 120
+        }
+      ],
+      "recs": {
+        "en": [
+          "Interval between doses: 4–6 hours when needed.",
+          "Children: maximum 60 mg/kg/day and usually no more than 4 doses per day.",
+          "Adults: maximum 4000 mg/day according to some labels; for self-medication preferably do not exceed 3000 mg/day without medical advice.",
+          "Count paracetamol from all products to avoid overdose.",
+          "Newborns and infants under 1 year need special dosing and medical guidance.",
+          "Use a proper measuring device for syrup, not a kitchen spoon.",
+          "Liver disease, chronic alcohol use, malnutrition, and low body weight need dose review."
+        ],
+        "ar": [
+          "الفاصل بين الجرعات: 4–6 ساعات عند الحاجة.",
+          "الأطفال: الحد الأقصى 60 ملغم/كغم/يوم وعادةً لا أكثر من 4 جرعات يوميًا.",
+          "البالغون: الحد الأقصى 4000 ملغم/يوم وفق بعض النشرات؛ وللاستخدام الذاتي يُفضّل عدم تجاوز 3000 ملغم/يوم دون توجيه طبي.",
+          "احسب الباراسيتامول من جميع المنتجات لتجنب الجرعة الزائدة.",
+          "حديثو الولادة والرضع دون السنة يحتاجون جرعات خاصة وتوجيهًا طبيًا.",
+          "استخدم أداة قياس مناسبة للشراب، وليس ملعقة الطعام.",
+          "أمراض الكبد والاستخدام المزمن للكحول وسوء التغذية وانخفاض الوزن تحتاج إلى مراجعة الجرعة."
         ]
       }
     }
