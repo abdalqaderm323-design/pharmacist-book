@@ -49,15 +49,13 @@ jobs:
 
       - name: Sign APK
         env:
-          KEYSTORE_B64: ${{ secrets.KEYSTORE_B64 }}
           KEY_PASS: ${{ secrets.KEY_PASS }}
         run: |
-          if [ -z "$KEYSTORE_B64" ]; then
-            echo "WARNING: no keystore secret, using a temporary key. Do not share this APK."
+          if [ ! -f release.keystore ] || [ -z "$KEY_PASS" ]; then
+            echo "WARNING: keystore or KEY_PASS missing, using a temporary key. Do not share this APK."
             export KEY_PASS="temporary-pass-123"
+            rm -f release.keystore
             keytool -genkeypair -keystore release.keystore -alias pharmacist -keyalg RSA -keysize 2048 -validity 10000 -storepass "$KEY_PASS" -keypass "$KEY_PASS" -dname "CN=Pharmacist Book"
-          else
-            echo "$KEYSTORE_B64" | base64 -d > release.keystore
           fi
           BT=$(ls -d $ANDROID_HOME/build-tools/* | sort -V | tail -1)
           $BT/zipalign -p -f 4 android/app/build/outputs/apk/release/app-release-unsigned.apk aligned.apk
