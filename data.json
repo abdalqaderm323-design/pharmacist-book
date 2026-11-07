@@ -1,7 +1,7 @@
 {
-  "dataVersion": 3,
+  "dataVersion": 4,
   "app": {
-    "latestVersion": "1.0.0",
+    "latestVersion": "1.1.0",
     "apkUrl": "https://github.com/abdalqaderm323-design/pharmacist-book/releases/latest/download/pharmacist-book.apk"
   },
   "topics": {
@@ -275,6 +275,27 @@
             }
           }
         ]
+      },
+      {
+        "id": "vac_1",
+        "rank": 1,
+        "group": "vaccines",
+        "title": {
+          "en": "Sample Vaccine",
+          "ar": "لقاح تجريبي"
+        },
+        "sections": [
+          {
+            "h": {
+              "en": "Uses",
+              "ar": "الاستخدامات"
+            },
+            "t": {
+              "en": "Sample text.",
+              "ar": "نص تجريبي."
+            }
+          }
+        ]
       }
     ],
     "diseases": [
@@ -523,5 +544,149 @@
         ]
       }
     }
-  ]
+  ],
+  "dosing": [
+    {
+      "drug": "d5",
+      "forms": [
+        {
+          "type": "syrup",
+          "strengths": [
+            {
+              "mg": 120,
+              "ml": 5
+            },
+            {
+              "mg": 250,
+              "ml": 5
+            }
+          ]
+        },
+        {
+          "type": "tablet",
+          "strengths": [
+            {
+              "mg": 500
+            },
+            {
+              "mg": 1000
+            }
+          ]
+        },
+        {
+          "type": "capsule",
+          "strengths": [
+            {
+              "mg": 500
+            }
+          ]
+        },
+        {
+          "type": "effervescent",
+          "strengths": [
+            {
+              "mg": 500
+            },
+            {
+              "mg": 1000
+            }
+          ]
+        },
+        {
+          "type": "dispersible",
+          "strengths": [
+            {
+              "mg": 250
+            },
+            {
+              "mg": 500
+            }
+          ]
+        },
+        {
+          "type": "suppository",
+          "strengths": [
+            {
+              "mg": 125
+            },
+            {
+              "mg": 250
+            },
+            {
+              "mg": 500
+            }
+          ]
+        },
+        {
+          "type": "sachet",
+          "strengths": [
+            {
+              "mg": 500
+            },
+            {
+              "mg": 1000
+            }
+          ]
+        }
+      ],
+      "rules": [
+        {
+          "id": "para_child",
+          "label": {
+            "en": "Children (1–11 years)",
+            "ar": "أطفال (1–11 سنة)"
+          },
+          "minAge": 1,
+          "maxAge": 11.99,
+          "method": "perKg",
+          "perKg": 15,
+          "maxSingle": 1000,
+          "timesPerDay": 4,
+          "maxDailyPerKg": 60,
+          "maxDaily": 4000
+        },
+        {
+          "id": "para_adult",
+          "label": {
+            "en": "Adults (12 years and older)",
+            "ar": "بالغون (12 سنة فأكثر)"
+          },
+          "minAge": 12,
+          "maxAge": 120,
+          "method": "fixed",
+          "fixed": 500,
+          "fixedMax": 1000,
+          "maxSingle": 1000,
+          "timesPerDay": 4,
+          "maxDaily": 4000
+        }
+      ],
+      "recs": {
+        "en": [
+          "Interval between doses: 4–6 hours when needed.",
+          "Children: maximum 60 mg/kg/day and usually no more than 4 doses per day.",
+          "Adults: maximum 4000 mg/day according to some labels; for self-medication preferably do not exceed 3000 mg/day without medical advice.",
+          "Count paracetamol from all products to avoid overdose.",
+          "Newborns and infants under 1 year need special dosing and medical guidance.",
+          "Use a proper measuring device for syrup, not a kitchen spoon.",
+          "Liver disease, chronic alcohol use, malnutrition, and low body weight need dose review."
+        ],
+        "ar": [
+          "الفاصل بين الجرعات: 4–6 ساعات عند الحاجة.",
+          "الأطفال: الحد الأقصى 60 ملغم/كغم/يوم وعادةً لا أكثر من 4 جرعات يوميًا.",
+          "البالغون: الحد الأقصى 4000 ملغم/يوم وفق بعض النشرات؛ وللاستخدام الذاتي يُفضّل عدم تجاوز 3000 ملغم/يوم دون توجيه طبي.",
+          "احسب الباراسيتامول من جميع المنتجات لتجنب الجرعة الزائدة.",
+          "حديثو الولادة والرضع دون السنة يحتاجون جرعات خاصة وتوجيهًا طبيًا.",
+          "استخدم أداة قياس مناسبة للشراب، وليس ملعقة الطعام.",
+          "أمراض الكبد والاستخدام المزمن للكحول وسوء التغذية وانخفاض الوزن تحتاج إلى مراجعة الجرعة."
+        ]
+      }
+    }
+  ],
+  "groups": {
+    "vaccines": {
+      "ar": "اللقاحات",
+      "en": "Vaccines"
+    }
+  }
 }
