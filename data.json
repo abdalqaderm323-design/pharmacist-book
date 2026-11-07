@@ -1,5 +1,5 @@
 {
-  "dataVersion": 1,
+  "dataVersion": 2,
   "app": {
     "latestVersion": "1.0.0",
     "apkUrl": "https://github.com/abdalqaderm323-design/pharmacist-book/releases/latest/download/pharmacist-book.apk"
@@ -144,6 +144,26 @@
             "t": {
               "en": "Sample text.",
               "ar": "نص تجريبي."
+            }
+          }
+        ]
+      },
+      {
+        "id": "x3",
+        "rank": 3,
+        "title": {
+          "en": "Sample Disease 3 (new)",
+          "ar": "مرض تجريبي 3 (جديد)"
+        },
+        "sections": [
+          {
+            "h": {
+              "en": "Overview",
+              "ar": "نبذة"
+            },
+            "t": {
+              "en": "This topic arrived through the Update button.",
+              "ar": "هذا الموضوع وصل عن طريق زر التحديث."
             }
           }
         ]
