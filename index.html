@@ -82,8 +82,8 @@ textarea.input{height:auto;min-height:200px;padding:12px;resize:vertical;line-he
 'use strict';
 
 /* ======= Settings you may change ======= */
-var APP_VERSION = '1.1.0';
-var GH = { owner: 'abdalqaderm323-design', repo: 'pharmacist-book', branch: 'main', folder: 'data' };
+var APP_VERSION = '1.0.0';
+var DATA_URL = 'https://raw.githubusercontent.com/abdalqaderm323-design/pharmacist-book/main/data.json';
 /* ======================================== */
 
 var STR = {
@@ -105,13 +105,7 @@ var STR = {
     noDoseData: 'لا توجد بيانات جرعات بعد', disclaimer: 'للتعليم فقط ولا يغني عن استشارة الصيدلي أو الطبيب.',
     updChecking: 'جاري التحقق من التحديثات...', updOk: 'تم تحديث المعلومات', updLatest: 'أنت على آخر نسخة', updOffline: 'تحتاج اتصال بالإنترنت للتحديث',
     updNewApp: 'يوجد تحديث جديد للتطبيق', updDownload: 'تنزيل التحديث', updCfg: 'رابط التحديث غير مضبوط بعد', close: 'إغلاق',
-    noData: 'تعذر تحميل بيانات التطبيق', backLbl: 'رجوع', menuLbl: 'القائمة', removeSaved: 'إزالة من المحفوظات', addSaved: 'حفظ الموضوع', version: 'النسخة', dataV: 'المعلومات',
-    formLbl: 'الشكل الدوائي', strLbl: 'التركيز', pickFormFirst: 'اختار الشكل أولاً', pickAll: 'اختار الدواء والشكل والتركيز أولاً',
-    mgU: 'ملغم', mlU: 'مل', amountLbl: 'الكمية', ruleLbl: 'الفئة', sexOpt: 'الجنس (اختياري)',
-    badFit: 'هذا الشكل أو التركيز لا يعطي الجرعة بدقة. اختر تركيزاً أو شكلاً آخر.',
-    noRule: 'لا توجد جرعة مسجلة لهذا العمر وهذا الشكل. استشر الصيدلي أو الطبيب.',
-    allLbl: 'الكل', searchDis: 'ابحث عن مرض', searchGen: 'ابحث', updFail: 'تعذر التحديث الآن، جرب بعد قليل',
-    updNoFolder: 'مجلد البيانات غير موجود على GitHub', updPartial: 'تم التحديث لكن تعذر تنزيل بعض الملفات'
+    noData: 'تعذر تحميل بيانات التطبيق', backLbl: 'رجوع', menuLbl: 'القائمة', removeSaved: 'إزالة من المحفوظات', addSaved: 'حفظ الموضوع', version: 'النسخة', dataV: 'المعلومات'
   },
   en: {
     appName: "The Pharmacist's Book", searchPh: 'Search for a drug or disease', catDose: 'Dose Calculator', catInter: 'Drug Interactions',
@@ -131,13 +125,7 @@ var STR = {
     noDoseData: 'No dose data yet', disclaimer: 'For education only. It does not replace advice from a pharmacist or doctor.',
     updChecking: 'Checking for updates...', updOk: 'Information updated', updLatest: 'You are on the latest version', updOffline: 'You need an internet connection to update',
     updNewApp: 'A new app update is available', updDownload: 'Download update', updCfg: 'The update link is not set yet', close: 'Close',
-    noData: 'Could not load app data', backLbl: 'Back', menuLbl: 'Menu', removeSaved: 'Remove from saved', addSaved: 'Save topic', version: 'Version', dataV: 'Data',
-    formLbl: 'Dosage form', strLbl: 'Strength', pickFormFirst: 'Pick the form first', pickAll: 'Pick the drug, form and strength first',
-    mgU: 'mg', mlU: 'mL', amountLbl: 'Amount', ruleLbl: 'Group', sexOpt: 'Sex (optional)',
-    badFit: 'This form or strength cannot give the dose accurately. Choose another strength or form.',
-    noRule: 'No dose is listed for this age and form. Ask a pharmacist or doctor.',
-    allLbl: 'All', searchDis: 'Search for a disease', searchGen: 'Search', updFail: 'Could not update right now, try again shortly',
-    updNoFolder: 'The data folder was not found on GitHub', updPartial: 'Updated, but some files could not be downloaded'
+    noData: 'Could not load app data', backLbl: 'Back', menuLbl: 'Menu', removeSaved: 'Remove from saved', addSaved: 'Save topic', version: 'Version', dataV: 'Data'
   }
 };
 
@@ -197,7 +185,6 @@ var last = store('last', null);
 var notes = store('notes', []);
 var homeCat = 'diseases';
 var homeQ = '';
-var homeGroup = null;
 var openGroups = { lib: true, sec: true };
 
 function toast(msg) {
@@ -207,85 +194,29 @@ function toast(msg) {
 
 /* ---------- data ---------- */
 function topicsOf(type) { return ((DATA.topics || {})[type] || []).slice().sort(function (a, b) { return (a.rank || 999) - (b.rank || 999); }); }
-/* main sections: drugs and diseases. Anything else (antibiotics, vaccines...) is a sub-group inside them */
-function catKeys() { return ['drugs', 'diseases']; }
-function catIcon(k) { return k === 'drugs' ? 'pill' : 'heart'; }
 function findTopic(id) {
-  var keys = catKeys();
-  for (var i = 0; i < keys.length; i++) {
-    var arr = (DATA.topics || {})[keys[i]] || [];
-    for (var j = 0; j < arr.length; j++) if (arr[j].id === id) return { topic: arr[j], type: keys[i] };
+  var types = ['drugs', 'diseases'];
+  for (var i = 0; i < types.length; i++) {
+    var arr = (DATA.topics || {})[types[i]] || [];
+    for (var j = 0; j < arr.length; j++) if (arr[j].id === id) return { topic: arr[j], type: types[i] };
   }
   return null;
 }
 function typeLabel(type) { return type === 'drugs' ? t('catDrugs') : t('catDiseases'); }
-function groupLabel(id) { return (DATA && DATA.groups && L(DATA.groups[id])) || id; }
-function groupsOf(type) {
-  var out = [];
-  topicsOf(type).forEach(function (tp) { if (tp.group && out.indexOf(tp.group) < 0) out.push(tp.group); });
-  return out;
-}
-/* row of sub-group tabs shown inside the drugs / diseases sections */
-function groupBar(type, sel, onPick) {
-  var ids = groupsOf(type); var box = h('div', { class: 'chips', style: 'margin:10px 0 0' });
-  if (!ids.length) return box;
-  box.appendChild(pill(t('allLbl'), !sel, function () { onPick(null); }));
-  ids.forEach(function (g) { box.appendChild(pill(groupLabel(g), sel === g, function () { onPick(g); })); });
-  return box;
-}
 function matches(topic, q) {
   q = norm(q.trim()); if (!q) return true;
   return norm(topic.title && topic.title.en).indexOf(q) >= 0 || norm(topic.title && topic.title.ar).indexOf(q) >= 0;
 }
-
-/* merge any number of data files into one DATA object */
-function buildData(files) {
-  var out = { dataVersion: 0, app: null, topics: { drugs: [], diseases: [] }, groups: {}, interactions: [], dosing: [] };
-  var imap = {}, dmap = {};
-  files.forEach(function (f) {
-    if (!f || typeof f !== 'object') return;
-    if (typeof f.dataVersion === 'number' && f.dataVersion > out.dataVersion) out.dataVersion = f.dataVersion;
-    if (f.app && typeof f.app === 'object') out.app = f.app;
-    if (f.groups && typeof f.groups === 'object') Object.keys(f.groups).forEach(function (k) { out.groups[k] = f.groups[k]; });
-    var tp = f.topics;
-    if (tp && typeof tp === 'object') Object.keys(tp).forEach(function (k) {
-      if (!Array.isArray(tp[k])) return;
-      /* any key other than diseases goes into drugs; an unknown key becomes a sub-group name */
-      var main = k === 'diseases' ? 'diseases' : 'drugs';
-      var folded = k !== 'drugs' && k !== 'diseases';
-      var arr = out.topics[main];
-      tp[k].forEach(function (x) {
-        if (!x || !x.id) return;
-        var y = {}; Object.keys(x).forEach(function (p) { y[p] = x[p]; });
-        if (!y.group) { var g = f.group || (folded ? k : null); if (g) y.group = g; }
-        for (var i = 0; i < arr.length; i++) if (arr[i].id === y.id) { arr[i] = y; return; }
-        arr.push(y);
-      });
-    });
-    (Array.isArray(f.interactions) ? f.interactions : []).forEach(function (x) { if (x && x.a && x.b) imap[[x.a, x.b].sort().join('|')] = x; });
-    (Array.isArray(f.dosing) ? f.dosing : []).forEach(function (x) { if (x && x.drug) dmap[x.drug] = x; });
-  });
-  out.interactions = Object.keys(imap).map(function (k) { return imap[k]; });
-  out.dosing = Object.keys(dmap).map(function (k) { return dmap[k]; });
-  if (!out.dataVersion) out.dataVersion = files.length;
-  return out;
-}
-function cachedFiles() {
-  var c = store('dataFiles', null);
-  if (!c || typeof c !== 'object') return [];
-  return Object.keys(c).sort().map(function (n) { return c[n] && c[n].json; }).filter(Boolean);
-}
 function loadData(done) {
-  try { localStorage.removeItem('dataOverride'); } catch (e) {}
-  function finish(bundled) {
-    var files = cachedFiles();
-    DATA = files.length ? buildData(files) : buildData([bundled]);
+  function pick(bundled) {
+    var ov = store('dataOverride', null);
+    DATA = (ov && ov.dataVersion > (bundled.dataVersion || 0)) ? ov : bundled;
     done();
   }
-  if (window.__DATA__) { finish(window.__DATA__); return; }
-  fetch('data.json').then(function (r) { return r.json(); }).then(finish).catch(function () {
-    var files = cachedFiles();
-    if (files.length) { DATA = buildData(files); done(); } else { document.getElementById('app').textContent = t('noData'); hideSplash(); }
+  if (window.__DATA__) { pick(window.__DATA__); return; }
+  fetch('data.json').then(function (r) { return r.json(); }).then(pick).catch(function () {
+    var ov = store('dataOverride', null);
+    if (ov) { DATA = ov; done(); } else { document.getElementById('app').textContent = t('noData'); hideSplash(); }
   });
 }
 
@@ -308,7 +239,7 @@ function rowEl(iconName, title, sub, fn) {
   return h('button', { class: 'row', onclick: fn }, kids);
 }
 function topicCard(topic, type) {
-  return h('button', { class: 'card', onclick: function () { go('topic-' + topic.id); } }, [h('span', { text: L(topic.title) }), h('small', { text: typeLabel(type) + (topic.group ? ' · ' + groupLabel(topic.group) : '') })]);
+  return h('button', { class: 'card', onclick: function () { go('topic-' + topic.id); } }, [h('span', { text: L(topic.title) }), h('small', { text: typeLabel(type) })]);
 }
 function pill(text, on, fn) { return h('button', { class: 'chip' + (on ? ' on' : ''), text: text, onclick: fn }); }
 function field(label) { return h('div', null, [h('div', { class: 'label', text: label })]); }
@@ -318,7 +249,7 @@ function openDrawer() { buildDrawer(); document.getElementById('drawer-wrap').cl
 function closeDrawer() { document.getElementById('drawer-wrap').classList.remove('open'); }
 function nav(hash) { closeDrawer(); go(hash); }
 function buildDrawer() {
-var w = document.getElementById('drawer-wrap'); w.innerHTML = '';
+  var w = document.getElementById('drawer-wrap'); w.innerHTML = '';
   var d = h('div', { class: 'drawer' });
   d.appendChild(h('div', { class: 'head' }, [h('img', { src: 'logo.png', alt: '' }), h('span', { text: t('appName') })]));
   function group(key, icon, title, items) {
@@ -332,10 +263,7 @@ var w = document.getElementById('drawer-wrap'); w.innerHTML = '';
     d.appendChild(h('div', { class: 'grp' }, [hd, body]));
   }
   group('lib', 'lib', t('lib'), [['bookmark', t('saved'), 'saved'], ['clock', t('cont'), 'continue']]);
-  var secItems = [['calc', t('catDose'), 'calc'], ['inter', t('catInter'), 'inter']];
-  catKeys().forEach(function (k) { secItems.push([catIcon(k), typeLabel(k), 'list-' + encodeURIComponent(k)]); });
-  secItems.push(['note', t('catNotes'), 'notes']);
-  group('sec', 'cat', t('sections'), secItems);
+  group('sec', 'cat', t('sections'), [['calc', t('catDose'), 'calc'], ['inter', t('catInter'), 'inter'], ['pill', t('catDrugs'), 'list-drugs'], ['heart', t('catDiseases'), 'list-diseases'], ['note', t('catNotes'), 'notes']]);
   d.appendChild(h('div', { class: 'ghd' }, [ic('lang'), h('span', { class: 't', text: t('lang') })]));
   d.appendChild(h('div', { class: 'pills' }, [
     pill('عربي', lang === 'ar', function () { setLang('ar'); }),
@@ -355,11 +283,6 @@ function applyLang() {
 }
 
 /* ---------- pages ---------- */
-function homeChips() {
-  var a = [['dose', t('catDose')], ['inter', t('catInter')]];
-  catKeys().forEach(function (k) { a.push([k, typeLabel(k)]); });
-  return a;
-}
 function pageHome() {
   var app = document.getElementById('app'); app.innerHTML = '';
   app.appendChild(topBar(t('appName'), { home: true }));
@@ -371,13 +294,13 @@ function pageHome() {
   wrap.appendChild(chipsBox); wrap.appendChild(list); app.appendChild(wrap);
   function draw() {
     chipsBox.innerHTML = ''; list.innerHTML = '';
-    homeChips().forEach(function (c) {
-      chipsBox.appendChild(pill(c[1], !homeQ.trim() && homeCat === c[0], function () { homeCat = c[0]; homeQ = ''; homeGroup = null; input.value = ''; draw(); }));
+    [['dose', t('catDose')], ['inter', t('catInter')], ['drugs', t('catDrugs')], ['diseases', t('catDiseases')]].forEach(function (c) {
+      chipsBox.appendChild(pill(c[1], !homeQ.trim() && homeCat === c[0], function () { homeCat = c[0]; homeQ = ''; input.value = ''; draw(); }));
     });
     var q = homeQ.trim();
     if (q) {
       var found = [];
-      catKeys().forEach(function (ty) { topicsOf(ty).forEach(function (tp) { if (matches(tp, q)) found.push([tp, ty]); }); });
+      ['drugs', 'diseases'].forEach(function (ty) { topicsOf(ty).forEach(function (tp) { if (matches(tp, q)) found.push([tp, ty]); }); });
       if (!found.length) { list.appendChild(h('div', { class: 'empty muted', text: t('noResults') })); return; }
       var g = h('div', { class: 'grid' }); found.forEach(function (f) { g.appendChild(topicCard(f[0], f[1])); }); list.appendChild(g);
     } else if (homeCat === 'dose') {
@@ -385,8 +308,7 @@ function pageHome() {
     } else if (homeCat === 'inter') {
       list.appendChild(rowEl('inter', t('openInter'), '', function () { go('inter'); }));
     } else {
-      var arr = topicsOf(homeCat).filter(function (tp) { return !homeGroup || tp.group === homeGroup; });
-      if (homeCat === 'drugs' || homeCat === 'diseases') list.appendChild(groupBar(homeCat, homeGroup, function (g) { homeGroup = g; draw(); }));
+      var arr = topicsOf(homeCat);
       if (!arr.length) { list.appendChild(h('div', { class: 'empty muted', text: t('noResults') })); return; }
       var g2 = h('div', { class: 'grid' }); arr.forEach(function (tp) { g2.appendChild(topicCard(tp, homeCat)); }); list.appendChild(g2);
     }
@@ -440,29 +362,18 @@ function pageSections() {
   var wrap = h('div', { class: 'wrap' });
   wrap.appendChild(rowEl('calc', t('catDose'), '', function () { go('calc'); }));
   wrap.appendChild(rowEl('inter', t('catInter'), '', function () { go('inter'); }));
-  catKeys().forEach(function (k) { wrap.appendChild(rowEl(catIcon(k), typeLabel(k), topicsOf(k).length + ' ' + t('topicsWord'), function () { go('list-' + encodeURIComponent(k)); })); });
+  wrap.appendChild(rowEl('pill', t('catDrugs'), topicsOf('drugs').length + ' ' + t('topicsWord'), function () { go('list-drugs'); }));
+  wrap.appendChild(rowEl('heart', t('catDiseases'), topicsOf('diseases').length + ' ' + t('topicsWord'), function () { go('list-diseases'); }));
   wrap.appendChild(rowEl('note', t('catNotes'), t('notesSub'), function () { go('notes'); }));
   app.appendChild(wrap);
 }
 
 function pageList(type) {
   var app = document.getElementById('app'); app.innerHTML = ''; app.appendChild(topBar(typeLabel(type)));
-  var wrap = h('div', { class: 'wrap' });
-  var ph = type === 'drugs' ? t('drugPh') : t('searchDis');
-  var input = h('input', { class: 'input', type: 'text', placeholder: ph, autocomplete: 'off' });
-  wrap.appendChild(h('div', { class: 'search' }, [ic('search'), input]));
-  var sel = null;
-  var bar = h('div'); var list = h('div', { style: 'margin-top:14px' });
-  wrap.appendChild(bar); wrap.appendChild(list); app.appendChild(wrap);
-  function drawBar() { bar.innerHTML = ''; bar.appendChild(groupBar(type, sel, function (g) { sel = g; drawBar(); draw(); })); }
-  function draw() {
-    list.innerHTML = '';
-    var arr = topicsOf(type).filter(function (tp) { return matches(tp, input.value) && (!sel || tp.group === sel); });
-    if (!arr.length) { list.appendChild(emptyState(t('noResults'), '')); return; }
-    arr.forEach(function (tp) { list.appendChild(rowEl(null, L(tp.title), tp.group ? groupLabel(tp.group) : '', function () { go('topic-' + tp.id); })); });
-  }
-  input.addEventListener('input', draw);
-  drawBar(); draw();
+  var wrap = h('div', { class: 'wrap' }); var arr = topicsOf(type);
+  if (!arr.length) wrap.appendChild(emptyState(t('noResults'), ''));
+  arr.forEach(function (tp) { wrap.appendChild(rowEl(null, L(tp.title), '', function () { go('topic-' + tp.id); })); });
+  app.appendChild(wrap);
 }
 
 /* drug search field with suggestions; returns {el, get, clear} */
@@ -505,118 +416,53 @@ function pageInter() {
   wrap.appendChild(err); wrap.appendChild(out); wrap.appendChild(h('div', { class: 'disc', text: t('disclaimer') })); app.appendChild(wrap);
 }
 
-/* ---------- dose calculator ---------- */
-var FORMS = {
-  syrup: { ar: 'شراب / معلّق', en: 'Syrup / suspension', liquid: true },
-  drops: { ar: 'قطرات فموية', en: 'Oral drops', liquid: true },
-  injection: { ar: 'حقن', en: 'Injection', liquid: true },
-  tablet: { ar: 'أقراص', en: 'Tablets', split: true, unit: { ar: 'قرص', en: 'tablet(s)' } },
-  capsule: { ar: 'كبسولات', en: 'Capsules', unit: { ar: 'كبسولة', en: 'capsule(s)' } },
-  effervescent: { ar: 'أقراص فوّارة', en: 'Effervescent tablets', unit: { ar: 'قرص', en: 'tablet(s)' } },
-  dispersible: { ar: 'أقراص قابلة للتفتت', en: 'Dispersible tablets', unit: { ar: 'قرص', en: 'tablet(s)' } },
-  suppository: { ar: 'تحاميل', en: 'Suppositories', unit: { ar: 'تحميلة', en: 'suppository' } },
-  sachet: { ar: 'أكياس', en: 'Sachets', unit: { ar: 'كيس', en: 'sachet(s)' } }
-};
-function fInfo(f) { return FORMS[f.type] || {}; }
-function fLabel(f) { return L(f.label) || L(fInfo(f)) || f.type || ''; }
-function fLiquid(f) { if (f.liquid !== undefined) return !!f.liquid; if (fInfo(f).liquid) return true; var s = f.strengths && f.strengths[0]; return !!(s && s.ml > 0); }
-function fSplit(f) { return f.split !== undefined ? !!f.split : !!fInfo(f).split; }
-function fUnit(f) { return L(f.unit) || L(fInfo(f).unit); }
-function sLabel(f, s) { return fLiquid(f) ? s.mg + ' ' + t('mgU') + ' / ' + s.ml + ' ' + t('mlU') : s.mg + ' ' + t('mgU'); }
-function fmtN(n) { return String(Math.round(n * 10) / 10); }
-function rangeTxt(a, b, unit) { var x = fmtN(a), y = fmtN(b); return (x === y ? x : x + '–' + y) + (unit ? ' ' + unit : ''); }
-function calcDose(rule, wt) {
-  var lo, hi;
-  if (rule.method === 'perKg') { lo = hi = wt * rule.perKg; }
-  else { lo = rule.fixed; hi = rule.fixedMax || rule.fixed; }
-  if (rule.maxSingle) { lo = Math.min(lo, rule.maxSingle); hi = Math.min(hi, rule.maxSingle); }
-  var md = rule.maxDaily || null;
-  if (rule.maxDailyPerKg) { var v = rule.maxDailyPerKg * wt; md = md ? Math.min(md, v) : v; }
-  return { lo: lo, hi: hi, maxDaily: md };
-}
-function unitsOf(mg, dose, split) { var n = dose / mg; return split ? Math.round(n * 2) / 2 : Math.round(n); }
-function kvRow(a, b) { return h('div', { class: 'kv' }, [h('span', { text: a }), h('span', { text: b })]); }
-
 function pageCalc() {
   var app = document.getElementById('app'); app.innerHTML = ''; app.appendChild(topBar(t('catDose')));
   var wrap = h('div', { class: 'wrap' }); var out = h('div'); var err = h('div', { class: 'err' });
-  var doses = (DATA && DATA.dosing) || []; var form = null, st = null, sex = null;
+  var doses = DATA.doses || []; var form = null, sex = null;
   function clear() { out.innerHTML = ''; err.textContent = ''; }
   function pool() { return doses.map(function (d) { var f = findTopic(d.drug); return f ? f.topic : null; }).filter(Boolean); }
-  var formsBox = h('div', { class: 'chips', style: 'margin:0' });
-  var strBox = h('div', { class: 'chips', style: 'margin:0' });
-  var sexBox = h('div', { class: 'chips', style: 'margin:0' });
-  var drugF = drugField(t('drugName'), pool, function () { form = null; st = null; clear(); drawForms(); drawStr(); });
+  var formsBox = h('div', { class: 'chips', style: 'margin:0' }); var sexBox = h('div', { class: 'chips', style: 'margin:0' });
+  var drugF = drugField(t('drugName'), pool, function () { form = null; clear(); drawForms(); });
   function curDose() { var d = drugF.get(); if (!d) return null; for (var i = 0; i < doses.length; i++) if (doses[i].drug === d.id) return doses[i]; return null; }
   function drawForms() {
     formsBox.innerHTML = ''; var cd = curDose();
     if (!cd) { formsBox.appendChild(h('span', { class: 'muted', text: t('pickDrugFirst') })); return; }
-    (cd.forms || []).forEach(function (f) {
-      formsBox.appendChild(pill(fLabel(f), form === f, function () {
-        form = f; st = (f.strengths && f.strengths.length === 1) ? f.strengths[0] : null; clear(); drawForms(); drawStr();
-      }));
-    });
+    cd.forms.forEach(function (f) { formsBox.appendChild(pill(L(f.label), form === f, function () { form = f; clear(); drawForms(); })); });
   }
-  function drawStr() {
-    strBox.innerHTML = '';
-    if (!form) { strBox.appendChild(h('span', { class: 'muted', text: t('pickFormFirst') })); return; }
-    (form.strengths || []).forEach(function (s) {
-      strBox.appendChild(pill(sLabel(form, s), st === s, function () { st = s; clear(); drawStr(); }));
-    });
-  }
-  function drawSex() {
-    sexBox.innerHTML = '';
-    [['m', t('male')], ['f', t('female')]].forEach(function (s) {
-      sexBox.appendChild(pill(s[1], sex === s[0], function () { sex = (sex === s[0]) ? null : s[0]; clear(); drawSex(); }));
-    });
-  }
+  function drawSex() { sexBox.innerHTML = ''; [['m', t('male')], ['f', t('female')]].forEach(function (s) { sexBox.appendChild(pill(s[1], sex === s[0], function () { sex = s[0]; clear(); drawSex(); })); }); }
   var ageIn = h('input', { class: 'input', type: 'number', inputmode: 'decimal', placeholder: '30', min: '0' });
   var wtIn = h('input', { class: 'input', type: 'number', inputmode: 'decimal', placeholder: '70', min: '0' });
   ageIn.addEventListener('input', clear); wtIn.addEventListener('input', clear);
   wrap.appendChild(drugF.el);
-  var wf = field(t('formLbl')); wf.appendChild(formsBox); wrap.appendChild(wf);
-  var ws = field(t('strLbl')); ws.appendChild(strBox); wrap.appendChild(ws);
-  var wa = field(t('age')); wa.appendChild(ageIn); wrap.appendChild(wa);
-  var wx = field(t('sexOpt')); wx.appendChild(sexBox); wrap.appendChild(wx);
-  var ww = field(t('weight')); ww.appendChild(wtIn); wrap.appendChild(ww);
+  var w2 = field(t('doseForm')); w2.appendChild(formsBox); wrap.appendChild(w2);
+  var w3 = field(t('age')); w3.appendChild(ageIn); wrap.appendChild(w3);
+  var w4 = field(t('sex')); w4.appendChild(sexBox); wrap.appendChild(w4);
+  var w5 = field(t('weight')); w5.appendChild(wtIn); wrap.appendChild(w5);
   wrap.appendChild(h('div', { style: 'height:16px' }));
   wrap.appendChild(h('button', { class: 'primary', text: t('calc'), onclick: function () {
     clear(); var cd = curDose(); var age = parseFloat(ageIn.value), wt = parseFloat(wtIn.value);
-    if (!cd || !form || !st) { err.textContent = t('pickAll'); return; }
+    if (!cd || !form) { err.textContent = t('pickDrugForm'); return; }
     if (!(age >= 0 && age <= 120)) { err.textContent = t('badAge'); return; }
-    var rule = null;
-    (cd.rules || []).forEach(function (r) {
-      var okAge = age >= (r.minAge || 0) && age <= (r.maxAge === undefined ? 120 : r.maxAge);
-      var okType = !r.types || r.types.indexOf(form.type) >= 0;
-      if (!rule && okAge && okType) rule = r;
-    });
+    if (!sex) { err.textContent = t('pickSex'); return; }
+    if (!(wt >= 1 && wt <= 300)) { err.textContent = t('badWt'); return; }
     drugF.hideSug();
     var box = h('div', { class: 'box' });
-    if (!rule) { box.appendChild(h('p', { style: 'margin:0;color:var(--amber)', text: t('noRule') })); out.appendChild(box); return; }
-    var needWt = rule.method === 'perKg' || !!rule.maxDailyPerKg;
-    if ((needWt || wtIn.value !== '') && !(wt >= 1 && wt <= 300)) { err.textContent = t('badWt'); return; }
-    var d = calcDose(rule, wt);
-    var bad = false, amt = '';
-    if (fLiquid(form)) {
-      if (st.ml > 0) amt = rangeTxt(d.lo * st.ml / st.mg, d.hi * st.ml / st.mg, t('mlU'));
-    } else {
-      var sp = fSplit(form), nl = unitsOf(st.mg, d.lo, sp), nh = unitsOf(st.mg, d.hi, sp);
-      [[nl, d.lo], [nh, d.hi]].forEach(function (p) { if (p[0] <= 0 || Math.abs(p[0] * st.mg - p[1]) / p[1] > 0.1) bad = true; });
-      if (nl > 0 && nh > 0) amt = rangeTxt(nl, nh, fUnit(form));
-    }
-    if (rule.label) box.appendChild(kvRow(t('ruleLbl'), L(rule.label)));
-    box.appendChild(kvRow(t('recDose'), rangeTxt(d.lo, d.hi) + ' ' + t('perDose')));
-    if (amt) box.appendChild(kvRow(t('amountLbl'), amt));
-    if (rule.timesPerDay) box.appendChild(kvRow(t('timesDay'), rule.timesPerDay + ' ' + t('times')));
-    if (d.maxDaily) box.appendChild(kvRow(t('maxDaily'), Math.round(d.maxDaily) + ' ' + t('mgDay')));
-    if (bad) box.appendChild(h('p', { style: 'margin:12px 0 0;color:var(--amber)', text: t('badFit') }));
+    var okAge = age >= (form.minAge || 0) && age <= (form.maxAge === undefined ? 120 : form.maxAge);
+    if (!okAge) { box.appendChild(h('p', { style: 'margin:0;color:var(--amber)', text: t('ageWarn') })); out.appendChild(box); return; }
+    var dose = form.method === 'perKg' ? wt * form.perKg : form.fixed;
+    if (form.maxSingle && dose > form.maxSingle) dose = form.maxSingle;
+    dose = Math.round(dose * 10) / 10;
+    box.appendChild(h('div', { class: 'kv' }, [h('span', { text: t('recDose') }), h('span', { text: dose + ' ' + t('perDose') })]));
+    box.appendChild(h('div', { class: 'kv' }, [h('span', { text: t('timesDay') }), h('span', { text: form.timesPerDay + ' ' + t('times') })]));
+    if (form.maxDaily) box.appendChild(h('div', { class: 'kv' }, [h('span', { text: t('maxDaily') }), h('span', { text: form.maxDaily + ' ' + t('mgDay') })]));
     var rl = cd.recs && (cd.recs[lang] || cd.recs.en || cd.recs.ar);
     if (rl && rl.length) { box.appendChild(h('div', { class: 'label', text: t('recs') })); rl.forEach(function (r) { box.appendChild(h('p', { style: 'margin:0 0 6px', text: '• ' + r })); }); }
     out.appendChild(box);
   } }));
   wrap.appendChild(err); wrap.appendChild(out); wrap.appendChild(h('div', { class: 'disc', text: t('disclaimer') }));
   if (!doses.length) wrap.insertBefore(h('div', { class: 'empty muted', text: t('noDoseData') }), wrap.firstChild);
-  drawForms(); drawStr(); drawSex(); app.appendChild(wrap);
+  drawForms(); drawSex(); app.appendChild(wrap);
 }
 
 function pageNotes() {
@@ -660,58 +506,22 @@ function modal(msg, btnText, fn) {
     h('button', { class: 'danger', style: 'border-color:var(--gold);color:var(--gold)', text: t('close'), onclick: function () { m.remove(); } })])]);
   document.body.appendChild(m);
 }
-function checkAppUpdate() {
-  var app = DATA && DATA.app;
-  if (app && app.apkUrl && newer(app.latestVersion, APP_VERSION)) {
-    modal(t('updNewApp'), t('updDownload'), function () { window.open(app.apkUrl, '_blank'); });
-    return true;
-  }
-  return false;
-}
-/* reads every .json file inside the GitHub data folder; only changed files are downloaded */
 function doUpdate() {
+  if (DATA_URL.indexOf('YOUR-USERNAME') >= 0) { toast(t('updCfg')); return; }
   toast(t('updChecking'));
-  var ctl = new AbortController(); var to = setTimeout(function () { ctl.abort(); }, 20000);
-  var api = 'https://api.github.com/repos/' + GH.owner + '/' + GH.repo + '/contents/' + GH.folder + '?ref=' + encodeURIComponent(GH.branch);
-  fetch(api, { signal: ctl.signal, cache: 'no-store', headers: { Accept: 'application/vnd.github+json' } })
-    .then(function (r) { if (r.status === 404) throw new Error('nofolder'); if (!r.ok) throw new Error('http'); return r.json(); })
-    .then(function (list) {
-      if (!Array.isArray(list)) throw new Error('http');
-      var files = list.filter(function (f) { return f && f.type === 'file' && /\.json$/i.test(f.name) && f.download_url; });
-      if (!files.length) throw new Error('http');
-      var cache = store('dataFiles', {}); if (!cache || typeof cache !== 'object') cache = {};
-      var next = {}, changed = false, failed = 0;
-      var jobs = files.map(function (f) {
-        var old = cache[f.name];
-        if (old && old.sha === f.sha && old.json) { next[f.name] = old; return Promise.resolve(); }
-        var url = f.download_url + (f.download_url.indexOf('?') >= 0 ? '&' : '?') + 't=' + Date.now();
-        return fetch(url, { signal: ctl.signal, cache: 'no-store' })
-          .then(function (r) { if (!r.ok) throw new Error('http'); return r.json(); })
-          .then(function (j) {
-            if (!j || typeof j !== 'object' || Array.isArray(j)) throw new Error('bad');
-            next[f.name] = { sha: f.sha, json: j }; changed = true;
-          })
-          .catch(function () { failed++; if (old && old.json) next[f.name] = old; });
-      });
-      return Promise.all(jobs).then(function () {
-        clearTimeout(to);
-        Object.keys(cache).forEach(function (n) { if (!next[n]) changed = true; });
-        if (!Object.keys(next).length) throw new Error('http');
-        if (changed) {
-          put('dataFiles', next);
-          DATA = buildData(Object.keys(next).sort().map(function (n) { return next[n].json; }));
-          toast(failed ? t('updPartial') : t('updOk')); render(); checkAppUpdate(); return;
-        }
-        if (failed) { toast(t('updPartial')); return; }
-        if (checkAppUpdate()) return;
-        toast(t('updLatest'));
-      });
-    })
-    .catch(function (e) {
+  var ctl = new AbortController(); var to = setTimeout(function () { ctl.abort(); }, 12000);
+  fetch(DATA_URL + '?t=' + Date.now(), { signal: ctl.signal, cache: 'no-store' })
+    .then(function (r) { if (!r.ok) throw new Error('http'); return r.json(); })
+    .then(function (remote) {
       clearTimeout(to);
-      var m = e && e.message;
-      toast(m === 'nofolder' ? t('updNoFolder') : m === 'http' ? t('updFail') : t('updOffline'));
-    });
+      if (!remote || typeof remote.dataVersion !== 'number' || !remote.topics) throw new Error('bad');
+      if (remote.dataVersion > DATA.dataVersion) { put('dataOverride', remote); DATA = remote; toast(t('updOk')); render(); return; }
+      if (remote.app && remote.app.apkUrl && newer(remote.app.latestVersion, APP_VERSION)) {
+        modal(t('updNewApp'), t('updDownload'), function () { window.open(remote.app.apkUrl, '_blank'); }); return;
+      }
+      toast(t('updLatest'));
+    })
+    .catch(function () { clearTimeout(to); toast(t('updOffline')); });
 }
 
 /* ---------- router ---------- */
@@ -723,7 +533,8 @@ function render() {
   else if (r === 'saved') pageSaved();
   else if (r === 'continue') pageContinue();
   else if (r === 'sections') pageSections();
-  else if (r.indexOf('list-') === 0) pageList(decodeURIComponent(r.slice(5)));
+  else if (r === 'list-drugs') pageList('drugs');
+  else if (r === 'list-diseases') pageList('diseases');
   else if (r === 'calc') pageCalc();
   else if (r === 'inter') pageInter();
   else if (r === 'notes') pageNotes();
