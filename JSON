@@ -1,0 +1,65 @@
+
+{
+  "id": "paracetamol",
+  "name": {
+    "en": "Paracetamol",
+    "ar": "باراسيتامول"
+  },
+  "genericName": "Paracetamol",
+  "synonyms": [
+    "Acetaminophen"
+  ],
+  "drugClass": {
+    "en": "Analgesic, Antipyretic",
+    "ar": "مسكن للألم وخافض للحرارة"
+  },
+  "dosageForms": [
+    {
+      "form": "Tablet",
+      "strengths": ["100 mg", "250 mg", "325 mg", "500 mg", "1000 mg"]
+    },
+    {
+      "form": "Capsule",
+      "strengths": ["500 mg"]
+    },
+    {
+      "form": "Oral Suspension",
+      "strengths": ["120 mg/5 mL", "125 mg/5 mL", "250 mg/5 mL"]
+    },
+    {
+      "form": "Suppository",
+      "strengths": ["100 mg", "125 mg", "250 mg", "500 mg", "1000 mg"]
+    },
+    {
+      "form": "Effervescent Tablet",
+      "strengths": ["500 mg", "1000 mg"]
+    },
+    {
+      "form": "Dispersible Tablet",
+      "strengths": ["100 mg", "250 mg", "500 mg"]
+    },
+    {
+      "form": "IV Infusion",
+      "strengths": ["10 mg/mL"]
+    }
+  ],
+  "dosage": {
+    "adult": {
+      "singleDose": "500-1000 mg",
+      "interval": "Every 4-6 hours",
+      "maximumDailyDose": "4000 mg",
+      "note": "Maximum dose depends on patient risk factors and product labeling."
+    },
+    "pediatric": {
+      "singleDose": "10-15 mg/kg",
+      "interval": "Every 4-6 hours",
+      "maximumDosesPerDay": 4,
+      "maximumDailyDose": "60 mg/kg/day"
+    }
+  },
+  "warnings": [
+    "Avoid duplicate paracetamol-containing medicines.",
+    "Use caution in hepatic impairment.",
+    "Overdose may cause severe liver damage."
+  ]
+}
